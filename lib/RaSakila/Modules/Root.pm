@@ -6,7 +6,9 @@ extends 'RapidApp::RootModule';
 use RapidApp::Include qw(sugar perlutil);
 
 use RapidApp::ErrorView;
-use RaSakila::Modules::Main;
+#use RaSakila::Modules::Explorer;
+
+use RapidApp::AppExplorer;
 
 around 'BUILDARGS' => sub {
 	my ($orig, $class, @args)= @_;
@@ -20,10 +22,24 @@ around 'BUILDARGS' => sub {
 sub BUILD {
 	my $self= shift;
 	
-	$self->app_title("RapidApp Example Application 1 (v" . $RaSakila::VERSION . ')');
+	my $title = "RapidApp Sakila (v" . $RaSakila::VERSION . ')';
+	
+	$self->app_title($title);
 	
 	$self->apply_init_modules(
-		main => 'RaSakila::Modules::Main',
+		main => {
+			class => 'RapidApp::AppExplorer',
+			params => {
+				title => 'Sakila Example App',
+				right_footer => $title,
+				iconCls => 'icon-server_database',
+				navtree_class => 'RapidApp::AppDbicTree',
+				navtree_params => {
+					dbic_models => [qw(Sakila)],
+					table_class	=> 'RaSakila::Modules::TableBase'
+				}
+			}
+		}
 	);
 }
 
