@@ -37,39 +37,9 @@ has '+open_record_class', lazy => 1, default => sub {
 #has '+include_colspec', default => sub{[qw(* *.*)]};
 
 
-sub customer_colspec {qw(
-*
-salesrepemployeenumber.reportsto.*
-)}
-
-
-
-has '+include_colspec', lazy => 1, default => sub {
-	my $self = shift;
-	
-	my @colspecs = ();
-	
-	my $source = $self->ResultSource->source_name;
-	scream($source);
-	
-	switch($source) {
-	
-		case 'Customer' {
-			push @colspecs,&customer_colspec;
-		}
-	
-		else {
-			push @colspecs, '*';
-		}
-	}
-	
-	
-	return \@colspecs;
-};
-
-
-has '+updatable_colspec', default => sub{[qw(* !id)]};
-has '+creatable_colspec', default => sub{[qw(* !id)]};
+has '+include_colspec', default => sub{[qw(*)]};
+has '+updatable_colspec', default => sub{[qw(*)]};
+has '+creatable_colspec', default => sub{[qw(*)]};
 has '+destroyable_relspec', default => sub{[qw(*)]};
 
 has '+persist_all_immediately', default => 0;
