@@ -1,0 +1,8 @@
+script/rasakila_create.pl model Sakila \
+ DBIC::Schema Schema::Sakila create=static dbi:mysql:sakila root ''
+
+script/rasakila_create.pl model Hp3k \
+ DBIC::Schema Schema::Hp3k create=static dbi:mysql:hp3k root ''
+
+script/rasakila_create.pl model GreenSheet \
+ DBIC::Schema Schema::GreenSheet create=static dbi:mysql:greensheet root ''
