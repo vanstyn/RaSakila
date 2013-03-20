@@ -35,7 +35,7 @@ use Catalyst;
 #with 'Catalyst::Plugin::RapidApp';
 
 our $VERSION = '0.01';
-our $TITLE = "RapidApp SakilaDB (v" . $RaSakila::VERSION . ')';
+our $TITLE = "RapidApp Sakila v" . $RaSakila::VERSION;
 
 # Configure the application.
 #
@@ -50,31 +50,19 @@ __PACKAGE__->config(
   name => 'RaSakila',
   # Disable deprecated behavior needed by old applications
   disable_component_resolution_regex_fallback => 1,
-  'Model::RapidApp' => {
-    rootModuleClass => 'RapidApp::RootModule',
-    rootModuleConfig => {
-      app_title => $TITLE,
-      main_module_class => 'RapidApp::AppExplorer',
-      main_module_params => {
-        title => 'Sakila Example App',
-        right_footer => $TITLE,
-        iconCls => 'icon-server_database',
-        navtree_class => 'RapidApp::AppDbicTree',
-        navtree_params => {
-          dbic_models => [qw(Sakila)],
-          table_class	=> 'RaSakila::Modules::TableBase'
-        }
-      }
-    }
-  }
+  'Plugin::RapidApp::RapidDbic' => {
+    title => $TITLE,
+    dbic_models => [qw(Sakila)],
+    
+  },
+  
+
+  
 );
 
 
-my @p = ();
-@p = @plugins;
-
 # Start the application
-__PACKAGE__->setup(@p);
+__PACKAGE__->setup(@plugins);
 
 
 =head1 NAME
