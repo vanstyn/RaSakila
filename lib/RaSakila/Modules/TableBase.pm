@@ -80,5 +80,18 @@ sub BUILD {
 }
 
 
+around content => sub {
+	my $orig = shift;
+	my $self = shift;
+	
+	my $ret = $self->$orig(@_);
+	
+	#scream($ret);
+	
+	return $ret;
+
+};
+
+
 1;
 

@@ -10,6 +10,7 @@ __PACKAGE__->config(
         dsn => 'dbi:mysql:hp3k',
         user => 'root',
         password => '',
+				quote_names => 1
     }
 );
 

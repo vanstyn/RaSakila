@@ -1,6 +1,6 @@
 package RaSakila;
-use Moose;
-use namespace::autoclean;
+#use Moose;
+#use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
 
@@ -16,15 +16,26 @@ use Catalyst::Runtime 5.80;
 # Static::Simple: will serve static files from the application's root
 #                 directory
 
+
+use RapidApp::Include qw(sugar perlutil);
+
+
 my @plugins = qw/
     -Debug
     ConfigLoader
     Static::Simple
+    RapidApp::RapidDbic
 /;
 
-extends 'RapidApp::Catalyst';
+use Catalyst;
+
+#extends 'RapidApp::Catalyst';
+
+#extends 'Catalyst';
+#with 'Catalyst::Plugin::RapidApp';
 
 our $VERSION = '0.01';
+our $TITLE = "RapidApp SakilaDB (v" . $RaSakila::VERSION . ')';
 
 # Configure the application.
 #
@@ -36,13 +47,34 @@ our $VERSION = '0.01';
 # local deployment.
 
 __PACKAGE__->config(
-    name => 'RaSakila',
-    # Disable deprecated behavior needed by old applications
-    disable_component_resolution_regex_fallback => 1,
+  name => 'RaSakila',
+  # Disable deprecated behavior needed by old applications
+  disable_component_resolution_regex_fallback => 1,
+  'Model::RapidApp' => {
+    rootModuleClass => 'RapidApp::RootModule',
+    rootModuleConfig => {
+      app_title => $TITLE,
+      main_module_class => 'RapidApp::AppExplorer',
+      main_module_params => {
+        title => 'Sakila Example App',
+        right_footer => $TITLE,
+        iconCls => 'icon-server_database',
+        navtree_class => 'RapidApp::AppDbicTree',
+        navtree_params => {
+          dbic_models => [qw(Sakila)],
+          table_class	=> 'RaSakila::Modules::TableBase'
+        }
+      }
+    }
+  }
 );
 
+
+my @p = ();
+@p = @plugins;
+
 # Start the application
-__PACKAGE__->setup(@plugins);
+__PACKAGE__->setup(@p);
 
 
 =head1 NAME

@@ -10,6 +10,7 @@ __PACKAGE__->config(
         dsn => 'dbi:mysql:greensheet',
         user => 'root',
         password => '',
+        quote_names => 1
     }
 );
 
