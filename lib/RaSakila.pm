@@ -59,6 +59,7 @@ __PACKAGE__->config(
   'Plugin::RapidApp::RapidDbic' => {
     title => $TITLE,
     dbic_models => [qw(Sakila)],
+    hide_fk_columns => 1
     
   },
   
