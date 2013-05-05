@@ -16,6 +16,12 @@ use Catalyst::Runtime 5.80;
 # Static::Simple: will serve static files from the application's root
 #                 directory
 
+# Find the rapidapp lib directory. Assume we're being ran from script/ dir
+# of a standard Catalyst App and the rapidapp repo is at rapidapp/
+use FindBin;
+use lib "$FindBin::Bin/../rapidapp/lib";
+
+
 
 use RapidApp::Include qw(sugar perlutil);
 
