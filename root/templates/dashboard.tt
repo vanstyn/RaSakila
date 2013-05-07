@@ -1,9 +1,13 @@
 
 
-<div class="dashboard-wrap">
+<div class="dashboard-wrap" style="padding:5px;">
 <div class="dashboard">
 
-<h1>Dash!</h1>
+<h1>This is an HTML Dashboard for this RapidApp application!</h1>
+
+<br>
+
+Items on the left are some sample databases that have been loaded
 
 </div>
 </div>

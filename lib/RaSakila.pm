@@ -61,6 +61,34 @@ __PACKAGE__->config(
     dbic_models => [qw(Sakila MixedArticles)],
     hide_fk_columns => 1,
     configs => {
+      Sakila => {
+        virtual_columns => {
+          Actor => {
+            full_name => {
+              data_type => "varchar", 
+              is_nullable => 0, 
+              sql => 'SELECT CONCAT(self.first_name,CONCAT(" ",self.last_name))'
+            }
+          }
+        },
+        TableSpecs => {
+          Actor => {
+            display_column => 'full_name'
+          },
+          City => {
+            display_column => 'city'
+          },
+          Country => {
+            display_column => 'country'
+          },
+          Film => {
+            display_column => 'title'
+          },
+          Language => {
+            display_column => 'name'
+          }
+        }
+      },
       MixedArticles => {
         grid => {},
         page => {},
