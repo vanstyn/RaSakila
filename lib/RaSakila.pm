@@ -28,7 +28,6 @@ use RapidApp::Include qw(sugar perlutil);
 
 my @plugins = qw/
     -Debug
-    ConfigLoader
     Static::Simple
     RapidApp::RapidDbic
 /;
@@ -58,13 +57,29 @@ __PACKAGE__->config(
   disable_component_resolution_regex_fallback => 1,
   'Plugin::RapidApp::RapidDbic' => {
     title => $TITLE,
-    dbic_models => [qw(Sakila)],
-    hide_fk_columns => 1
-    
+    dashboard_template => 'templates/dashboard.tt',
+    dbic_models => [qw(Sakila MixedArticles)],
+    hide_fk_columns => 1,
+    configs => {
+      MixedArticles => {
+        grid => {},
+        page => {},
+        TableSpecs => {
+          Article => {
+            title => 'Article',
+            title_multi => 'Articles',
+            columns => {
+              articletext => {
+                hidden => \1,
+                profiles => ['html']
+              }
+            }
+          }
+        }
+      }
+    }
   },
-  
-
-  
+ 
 );
 
 
