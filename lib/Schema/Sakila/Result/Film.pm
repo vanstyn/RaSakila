@@ -276,6 +276,12 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2013-03-18 14:09:10
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YH2sMkieh/4+fZKqd/XP5Q
 
+use RapidApp::Include qw(perlutil sugar);
+
+__PACKAGE__->load_components('+RapidApp::DBIC::Component::TableSpec');
+__PACKAGE__->TableSpec_m2m( categories => 'film_categories', 'category' );
+__PACKAGE__->apply_TableSpec;
+
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

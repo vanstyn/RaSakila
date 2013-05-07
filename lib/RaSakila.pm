@@ -75,6 +75,9 @@ __PACKAGE__->config(
           Actor => {
             display_column => 'full_name'
           },
+          Category => {
+            display_column => 'name'
+          },
           City => {
             display_column => 'city'
           },
