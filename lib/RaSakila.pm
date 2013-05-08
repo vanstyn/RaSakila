@@ -69,6 +69,24 @@ __PACKAGE__->config(
     ],
     hide_fk_columns => 1,
     configs => {
+      'RapidApp::CoreSchema' => {
+        grid_params => {
+          '*defaults' => {
+            updatable_colspec => ['*'],
+            creatable_colspec => ['*'],
+            destroyable_relspec => ['*'],
+          },
+          Role => {
+            no_page => 1,
+            persist_immediately => {
+              create => \0,
+              update => \0,
+              destroy	=> \0
+            },
+            extra_extconfig => { use_add_form => \0 }
+          }
+        }
+      },
       Sakila => {
         grid_params => {
           '*defaults' => {
