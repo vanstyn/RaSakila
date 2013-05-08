@@ -61,7 +61,7 @@ __PACKAGE__->config(
   'Plugin::RapidApp::RapidDbic' => {
     title => $TITLE,
     dashboard_template => 'templates/dashboard.tt',
-    banner_template => 'templates/banner.tt',
+    banner_template => 'templates/rapidapp/simple_auth_banner.tt',
     dbic_models => [
       'Sakila',
       'MixedArticles',
