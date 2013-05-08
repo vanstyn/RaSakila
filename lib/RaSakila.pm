@@ -21,16 +21,16 @@ use Catalyst::Runtime 5.80;
 use FindBin;
 use lib "$FindBin::Bin/../rapidapp/lib";
 
-
-
 use RapidApp::Include qw(sugar perlutil);
 
 
-my @plugins = qw/
+my @plugins = qw(
     -Debug
     Static::Simple
     RapidApp::RapidDbic
-/;
+);
+
+push @plugins, qw(RapidApp::AuthCore);
 
 use Catalyst;
 
@@ -55,13 +55,28 @@ __PACKAGE__->config(
   name => 'RaSakila',
   # Disable deprecated behavior needed by old applications
   disable_component_resolution_regex_fallback => 1,
+  'Model::RapidApp::CoreSchema' => {
+    #db_file => 'foo.db'
+  },
   'Plugin::RapidApp::RapidDbic' => {
     title => $TITLE,
     dashboard_template => 'templates/dashboard.tt',
-    dbic_models => [qw(Sakila MixedArticles)],
+    banner_template => 'templates/banner.tt',
+    dbic_models => [
+      'Sakila',
+      'MixedArticles',
+      'RapidApp::CoreSchema'
+    ],
     hide_fk_columns => 1,
     configs => {
       Sakila => {
+        grid_params => {
+          '*defaults' => {
+            updatable_colspec => ['*'],
+            creatable_colspec => ['*'],
+            deletable_colspec => ['*']
+          }
+        },
         virtual_columns => {
           Actor => {
             full_name => {

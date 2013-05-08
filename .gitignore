@@ -1,3 +1,4 @@
+ext-*
 nytprof*
 cas_store*
 simplecas-store*
@@ -5,3 +6,4 @@ bgtask
 NEW_USER_DB*
 general_cache*
 root/autoassets*
+*.db
