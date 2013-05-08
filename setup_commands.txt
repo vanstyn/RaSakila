@@ -9,3 +9,6 @@ script/rasakila_create.pl model GreenSheet \
 
 script/rasakila_create.pl model MixedArticles \
  DBIC::Schema Schema::MixedArticles create=static dbi:mysql:mixed_articles root ''
+
+script/rasakila_create.pl model Countries \
+ DBIC::Schema Schema::Countries create=static dbi:mysql:countries root ''

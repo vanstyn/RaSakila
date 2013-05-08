@@ -65,6 +65,7 @@ __PACKAGE__->config(
     dbic_models => [
       'Sakila',
       'MixedArticles',
+      'Countries',
       'RapidApp::CoreSchema'
     ],
     hide_fk_columns => 1,
