@@ -12,3 +12,7 @@ script/rasakila_create.pl model MixedArticles \
 
 script/rasakila_create.pl model Countries \
  DBIC::Schema Schema::Countries create=static dbi:mysql:countries root ''
+ 
+ 
+script/rasakila_create.pl model ItsInventory \
+ DBIC::Schema Schema::ItsInventory create=static dbi:mysql:its_inventory root ''

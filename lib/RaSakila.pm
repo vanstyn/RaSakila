@@ -40,7 +40,7 @@ use Catalyst;
 #with 'Catalyst::Plugin::RapidApp';
 
 our $VERSION = '0.01';
-our $TITLE = "RapidApp Sakila v" . $RaSakila::VERSION;
+our $TITLE = "RapidApp Demo1 v" . $RaSakila::VERSION;
 
 # Configure the application.
 #
@@ -52,7 +52,7 @@ our $TITLE = "RapidApp Sakila v" . $RaSakila::VERSION;
 # local deployment.
 
 __PACKAGE__->config(
-  name => 'RaSakila',
+  name => 'RaDemo1',
   # Disable deprecated behavior needed by old applications
   disable_component_resolution_regex_fallback => 1,
   'Model::RapidApp::CoreSchema' => {
@@ -60,13 +60,15 @@ __PACKAGE__->config(
   },
   'Plugin::RapidApp::RapidDbic' => {
     title => $TITLE,
+    nav_title => 'Sample Databases',
     dashboard_template => 'templates/dashboard.tt',
     banner_template => 'templates/rapidapp/simple_auth_banner.tt',
     dbic_models => [
       'Sakila',
       'MixedArticles',
       'Countries',
-      'RapidApp::CoreSchema'
+      'RapidApp::CoreSchema',
+      'ItsInventory'
     ],
     hide_fk_columns => 1,
     configs => {
@@ -87,6 +89,46 @@ __PACKAGE__->config(
             extra_extconfig => { use_add_form => \0 }
           }
         }
+      },
+      Countries => {
+        grid_params => {
+          '*defaults' => {
+            include_colspec => ['*', '*.*'],
+            updatable_colspec => ['*'],
+            creatable_colspec => ['*'],
+            destroyable_relspec => ['*'],
+          },
+        },
+        virtual_columns => {
+          FormofGovernment => {
+            gov_tot_population => {
+              data_type => "int", 
+              is_nullable => 0, 
+              sql => 'SELECT SUM(Population) FROM countryinfo where FormofGovernment = self.name'
+            },
+            avg_yearofindep => {
+              data_type => "int", 
+              is_nullable => 0, 
+              sql => 'SELECT ROUND(AVG(yearofindep)) FROM countryinfo ' .
+                'where FormofGovernment = self.name and yearofindep IS NOT NULL'
+            }
+          },
+          Region => {
+            region_population => {
+              data_type => "int", 
+              is_nullable => 0, 
+              sql => 'SELECT SUM(Population) FROM countryinfo where Region = self.name'
+            }
+          },
+          Continent => {
+            cotinent_population => {
+              data_type => "int", 
+              is_nullable => 0, 
+              sql => 'SELECT SUM(Population) FROM countryinfo where Continent = self.name'
+            }
+          }
+        }
+      
       },
       Sakila => {
         grid_params => {
@@ -141,7 +183,59 @@ __PACKAGE__->config(
             }
           }
         }
+      },
+      
+      ItsInventory => {
+       grid_params => {
+          #'*defaults' => {
+          #  updatable_colspec => ['*'],
+          #  creatable_colspec => ['*'],
+          #  destroyable_relspec => ['*'],
+          #},
+          Item => {
+            include_colspec => ['*', 'location.client' ]
+          }
+        },
+      
+        virtual_columns => {
+          Location => {
+            full_location => {
+              data_type => "varchar", 
+              is_nullable => 0, 
+              sql => 'SELECT CONCAT(self.name,CONCAT(" - ",' 
+                .'(SELECT name from clients WHERE id = self.client_id LIMIT 1)'
+              .'))'
+            }
+          }
+        },
+        TableSpecs => {
+          Category => {
+            display_column => 'name'
+          },
+          Client => {
+            display_column => 'name'
+          },
+          Item => {
+            display_column => 'name'
+          },
+          Statuse => {
+            display_column => 'name'
+          },
+          Location => {
+            display_column => 'full_location'
+          },
+          User => {
+            display_column => 'username'
+          },
+          Vendor => {
+            display_column => 'name'
+          }
+          
+        
+        }
+      
       }
+      
     }
   },
  
