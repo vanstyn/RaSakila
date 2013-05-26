@@ -84,6 +84,7 @@ __PACKAGE__->config(
             updatable_colspec => ['*'],
             creatable_colspec => ['*'],
             destroyable_relspec => ['*'],
+            cache_total_count => 0
           },
           Role => {
             no_page => 1,
