@@ -32,6 +32,7 @@ my @plugins = qw(
 
 push @plugins, qw(RapidApp::AuthCore);
 push @plugins, qw(RapidApp::NavCore);
+push @plugins, qw(RapidApp::RequestLogger);
 
 use Catalyst;
 
