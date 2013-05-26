@@ -31,6 +31,7 @@ my @plugins = qw(
 );
 
 push @plugins, qw(RapidApp::AuthCore);
+push @plugins, qw(RapidApp::NavCore);
 
 use Catalyst;
 
@@ -58,11 +59,15 @@ __PACKAGE__->config(
   'Model::RapidApp::CoreSchema' => {
     #db_file => 'foo.db'
   },
+  'Plugin::RapidApp::NavCore' => {
+    allow_manage => 1, #<-- default '1'
+    user_views => 1 #<-- default '1'
+  },
   'Plugin::RapidApp::RapidDbic' => {
     title => $TITLE,
     nav_title => 'Sample Databases',
     dashboard_template => 'templates/dashboard.tt',
-    banner_template => 'templates/rapidapp/simple_auth_banner.tt',
+    #banner_template => 'templates/rapidapp/simple_auth_banner.tt',
     dbic_models => [
       'Sakila',
       'MixedArticles',
