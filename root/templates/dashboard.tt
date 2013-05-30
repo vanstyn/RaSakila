@@ -1,13 +1,41 @@
 
+<head>
+<title>Dashboard</title>
+</head>
 
-<div class="dashboard-wrap" style="padding:5px;">
-<div class="dashboard">
 
-<h1>This is an HTML Dashboard for this RapidApp application!</h1>
+<div class="ra-doc">
 
-<br>
+<h1>RapidApp Demo site (RaDemo1/RaSaila)</h1>
 
-Items on the left are some sample databases that have been loaded
+<p>This is an example application providing a front-end for various DBIC schemas in order to showcase some of the functionality of the RapidApp framework.</p>
+
+<p>Click the items on the left to explore the application and databases.</p>
+
+
+<h2>What is RapidApp?</h2>
+
+<p>RapidApp is an open-source application framework that is currently under development for quickly building dynamic Web 2.0/AJAX interfaces for various data models.</p>
+
+<h3 style="padding-left:5px;">
+  For more information, see: <a href="#!/main/page?file=rapidapp/about_rapidapp.tt">About RapidApp</a>
+</h3>
+
+
+
+<p>This demo showcases some features that can be easily built using RapidApp, such as saved views, automatic authentication db, navigation trees, and so on. Explore the app by clicking the items on the left. </p>
+
+
+<h2>Application Config</h2>
+
+This application config is automatically generated using the "RapidDbic" Catalyst plugin which automatically sets up Grid views and object pages for super-fast setup. The entire configuration of this application is contained in the main Catalyst class/package file:
+
+<ul><li><b>
+<a href="#!/main/page?file=lib/RaSakila.pm">lib/RaSakila.pm</a>
+</b>
+</li></ul>
+
+<br><br>
 
 </div>
-</div>
+

@@ -32,7 +32,7 @@ my @plugins = qw(
 
 push @plugins, qw(RapidApp::AuthCore);
 push @plugins, qw(RapidApp::NavCore);
-push @plugins, qw(RapidApp::RequestLogger);
+#push @plugins, qw(RapidApp::RequestLogger);
 
 use Catalyst;
 
@@ -41,7 +41,7 @@ use Catalyst;
 #extends 'Catalyst';
 #with 'Catalyst::Plugin::RapidApp';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $TITLE = "RapidApp Demo1 v" . $RaSakila::VERSION;
 
 # Configure the application.
@@ -68,7 +68,7 @@ __PACKAGE__->config(
     title => $TITLE,
     nav_title => 'Sample Databases',
     dashboard_template => 'templates/dashboard.tt',
-    #banner_template => 'templates/rapidapp/simple_auth_banner.tt',
+    page_view_dir => 'root/pages',
     dbic_models => [
       'Sakila',
       'MixedArticles',
