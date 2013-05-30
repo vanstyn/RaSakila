@@ -53,6 +53,7 @@ our $TITLE = "RapidApp Demo1 v" . $RaSakila::VERSION;
 # with an external configuration file acting as an override for
 # local deployment.
 
+
 __PACKAGE__->config(
   name => 'RaDemo1',
   # Disable deprecated behavior needed by old applications
@@ -176,13 +177,24 @@ __PACKAGE__->config(
         }
       },
       MixedArticles => {
-        grid => {},
-        page => {},
+        grid_params => {
+         '*defaults' => {
+            include_colspec => ['*'],
+            updatable_colspec => ['*'],
+            creatable_colspec => ['*'],
+            destroyable_relspec => ['*'],
+          },
+          Article => {
+            page_class => 'RaSakila::Modules::ArticlePage'
+          }
+        },
         TableSpecs => {
           Article => {
             title => 'Article',
             title_multi => 'Articles',
+            display_column => 'title',
             columns => {
+              id => { allow_add => \0 },
               articletext => {
                 hidden => \1,
                 profiles => ['html']
