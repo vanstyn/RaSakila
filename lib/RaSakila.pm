@@ -200,6 +200,10 @@ __PACKAGE__->config(
                 profiles => ['html']
               }
             }
+          },
+          Category => {
+            # Override the editor to be a simple combo/dropdown
+            auto_editor_type => 'combo'
           }
         }
       },
