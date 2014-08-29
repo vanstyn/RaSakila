@@ -4,7 +4,7 @@ use namespace::autoclean;
 
 use Catalyst;
 use Catalyst::Runtime 5.80;
-use RapidApp 0.99014;
+use RapidApp 0.99333;
 
 my @plugins = qw(
     -Debug
@@ -13,17 +13,19 @@ my @plugins = qw(
 push @plugins, qw(RapidApp::AuthCore);
 push @plugins, qw(RapidApp::NavCore);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 our $TITLE = "RapidApp Demo1 v" . $RaSakila::VERSION;
 
 __PACKAGE__->config(
-  name => 'RaDemo1',
-  # Disable deprecated behavior needed by old applications
-  disable_component_resolution_regex_fallback => 1,
-
-  'Plugin::RapidApp::RapidDbic' => {
+  name => 'RaSakila',
+  
+  'Plugin::RapidApp::TabGui' => {
     title => $TITLE,
     nav_title => 'Sample Databases',
+    dashboard_template => 'templates/dashboard.tt',
+  },
+
+  'Plugin::RapidApp::RapidDbic' => {
     
     dbic_models => [
       'Sakila',
@@ -31,10 +33,6 @@ __PACKAGE__->config(
       'Countries',
       'ItsInventory'
     ],
-    
-}); __PACKAGE__->setup(@plugins); __END__
-
-    dashboard_template => 'templates/dashboard.tt',
     
     hide_fk_columns => 1,
     configs => {
@@ -60,7 +58,8 @@ __PACKAGE__->config(
       Countries => {
         grid_params => {
           '*defaults' => {
-            include_colspec => ['*', '*.*'],
+            #include_colspec => ['*', '*.*'],
+            include_colspec => ['*'],
             updatable_colspec => ['*'],
             creatable_colspec => ['*'],
             destroyable_relspec => ['*'],
