@@ -131,6 +131,13 @@ __PACKAGE__->config(
           },
           Language => {
             display_column => 'name'
+          },
+          Staff => {
+            columns => {
+              picture => {
+                profiles => ['img_blob']
+              }
+            }
           }
         }
       },
